@@ -75,6 +75,10 @@ const calculate = () => {
       key: 'Boards Needed',
       value: `${boards.length + 1}`
     },
+    {
+      key: 'Remaining Lengths',
+      value: `${boards.map(b => boardLength.value - b).join(', ')}`
+    },
   ];
 }
 

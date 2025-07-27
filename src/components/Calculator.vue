@@ -54,26 +54,26 @@ const calculate = () => {
   cuts.sort()
   cuts.reverse();
 
-  let currentLength = 0;
-  let boards = 0;
+  const boards : number[] = [];
   cuts.forEach(cut => {
     const next = cut + bladeWidth.value;
-    if (currentLength + next >= boardLength.value) {
-      currentLength = 0;
-      boards++;
+    const matched = !!boards.find((_, i) => {
+      if (boards[i] + next < boardLength.value) {
+        boards[i] += next;
+        return true;
+      }
+      return false;
+    });
+    if (!matched) {
+      boards.push(next);
     }
-    currentLength += next;
   });
 
   input.value = cuts.join('\n');
   calcd.value = [
     {
       key: 'Boards Needed',
-      value: `${boards + 1}`
-    },
-    {
-      key: 'Remaining On Last Board',
-      value: `${boardLength.value - currentLength}`
+      value: `${boards.length + 1}`
     },
   ];
 }

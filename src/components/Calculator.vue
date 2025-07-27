@@ -5,6 +5,7 @@ const storageKey = 'prefs';
 
 const input = ref('72\n48\n18');
 const boardLength = ref(96);
+const bladeWidth = ref(1/8);
 const calcd = ref<CalculatedValue[]>([]);
 
 interface CalculatedValue {
@@ -15,12 +16,14 @@ interface CalculatedValue {
 interface Prefs {
   input: string;
   boardLength: number;
+  bladeWidth: number;
 }
 
 watch([input, boardLength], () => {
   const prefs : Prefs = {
     input: input.value,
     boardLength: boardLength.value,
+    bladeWidth: bladeWidth.value,
   }
   localStorage.setItem(storageKey, JSON.stringify(prefs));
 });
@@ -30,8 +33,9 @@ onMounted(() => {
     const stored = localStorage.getItem(storageKey);
     if (stored) {
       const parsed = JSON.parse(stored) as Prefs;
-      input.value = parsed.input;
-      boardLength.value = parsed.boardLength;
+      input.value = parsed.input || '';
+      boardLength.value = parsed.boardLength || 96;
+      bladeWidth.value = parsed.bladeWidth || (1/8);
     }
   } catch (e) {
     console.error(e);
@@ -53,11 +57,12 @@ const calculate = () => {
   let currentLength = 0;
   let boards = 0;
   cuts.forEach(cut => {
-    if (currentLength + cut >= boardLength.value) {
+    const next = cut + bladeWidth.value;
+    if (currentLength + next >= boardLength.value) {
       currentLength = 0;
       boards++;
     }
-    currentLength += cut;
+    currentLength += next;
   });
 
   input.value = cuts.join('\n');
@@ -84,6 +89,14 @@ const calculate = () => {
           placeholder="Stock Board Length"
           id="boardLength"
           v-model="boardLength"
+          type="number" />
+      </div>
+      <div class="input-item">
+        <label for="bladeWidth">Blade Width</label>
+        <input 
+          placeholder="Blade Width"
+          id="bladeWidth"
+          v-model="bladeWidth"
           type="number" />
       </div>
       <div class="input-item">
@@ -139,7 +152,7 @@ input,textarea {
   padding: 0.25em;
 }
 textarea {
-  height: 50vh;
+  height: 40vh;
 }
 .output {
   padding: 1em 0;

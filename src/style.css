@@ -1,0 +1,20 @@
+:root {
+  --charcoal: #373f51ff;
+  --dun: #d7c9aaff;
+  --antiflash-white: #f0f3f5ff;
+  --tufts-blue: #228cdbff;
+  --rose: #f42272ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  background: var(--charcoal);
+  color: var(--antiflash-white);
+}

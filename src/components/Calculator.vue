@@ -139,7 +139,7 @@ input,textarea {
   padding: 0.25em;
 }
 textarea {
-  height: 60vh;
+  height: 50vh;
 }
 .output {
   padding: 1em 0;

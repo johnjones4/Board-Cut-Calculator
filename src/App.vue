@@ -7,6 +7,10 @@ import Calculator from './components/Calculator.vue'
     <h1>Board Cut Calculator</h1>
     <p>Paste in a list of cut lengths below and calculate how much stock you need to get the job done!</p>
     <Calculator />
+    <p>
+      Built by <a href="https://johnjonesfour.com/">John Jones</a>.
+      View the source on <a href="https://github.com/johnjones4/board-cut-calculator">GitHub</a>
+    </p>
   </div>
 </template>
 

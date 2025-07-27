@@ -18,3 +18,7 @@ body {
   background: var(--charcoal);
   color: var(--antiflash-white);
 }
+
+a {
+  color: var(--tufts-blue);
+}
